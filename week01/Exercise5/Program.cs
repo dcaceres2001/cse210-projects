@@ -34,7 +34,7 @@ class Program
         DisplayWelcome();
         string name = PromptUserName();
         int number = PromptUserNumber();
-        DisplayResult(name, number);
+        DisplayResult(name, number); 
     }
 
 
