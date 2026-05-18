@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 public class Entry
 {
-    public string Prompt { get; set; }
-    public string Response { get; set; }
-    public DateTime Date { get; set; }
+    public string Prompt;
+    public string Response;
+    public DateTime Date;
 
     public Entry(string prompt, string response)
     {
