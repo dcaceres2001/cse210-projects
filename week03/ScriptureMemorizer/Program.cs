@@ -26,8 +26,8 @@ class Program
 
         while (true)
         {
-
-            try
+            //I was having issues debugging the console clear, so I added a try-catch block.
+            
             {
                 Console.Clear();
             }
