@@ -59,6 +59,6 @@ public class Scripture
     {
         
         string text = string.Join(" ", _words);
-        return $"{_reference}: {text}";
+        return $"{_reference}:  {text}";
     }
 }
