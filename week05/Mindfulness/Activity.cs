@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Mindfulness
 {
-    class Activity
+    public abstract class Activity
     {
-        protected string _name;
-        protected string _description;
+        private string _name;
+        private string _description;
         protected int _duration;
 
         public Activity(string name, string description)
@@ -15,22 +16,82 @@ namespace Mindfulness
             _description = description;
         }
 
-        public void DisplayStartMessage()
+        public void Run()
         {
-            Console.WriteLine($"Starting {_name}...");
+            DisplayStartingMessage();
+            ExecuteActivity();
+            DisplayEndingMessage();
+        }
+
+        protected abstract void ExecuteActivity();
+
+        private void DisplayStartingMessage()
+        {
+           
+            Console.WriteLine($"Welcome to the {_name}.\n");
             Console.WriteLine(_description);
+            Console.WriteLine();
+
+            Console.Write("How long, in seconds, would you like for your session? ");
+            while (!int.TryParse(Console.ReadLine(), out _duration) || _duration <= 0)
+            {
+                Console.Write("Please enter a valid positive number for seconds: ");
+            }
+
+            
             Console.WriteLine("Get ready...");
-            // Add a countdown or timer here if desired
+            ShowSpinner(3);
+            Console.WriteLine();
         }
 
-        public void DisplayEndMessage()
+        private void DisplayEndingMessage()
         {
-            Console.WriteLine($"Well done! You have completed {_name} for {_duration} seconds.");
+            Console.WriteLine();
+            Console.WriteLine("Well done!!");
+            ShowSpinner(3);
+            Console.WriteLine($"You have completed another {_duration} seconds of the {_name}.");
+            ShowSpinner(3);
         }
 
-        public void SetDuration(int duration)
+        protected void ShowSpinner(int seconds)
         {
-            _duration = duration;
+            
+            List<string> animationStrings = new List<string> { "|", "/", "-", "\\" };
+
+            DateTime startTime = DateTime.Now;
+            DateTime endTime = startTime.AddSeconds(seconds);
+
+            int i = 0;
+            while (DateTime.Now < endTime)
+            {
+                string s = animationStrings[i];
+                Console.Write(s);
+
+                
+                Thread.Sleep(100);
+
+                
+                Console.Write("\b");
+
+                i++;
+                if (i >= animationStrings.Count)
+                {
+                    i = 0;
+                }
+            }
+
+            
+            Console.Write(" \b");
+        }
+
+        protected void ShowCountdown(int seconds)
+        {
+            for (int i = seconds; i > 0; i--)
+            {
+                Console.Write(i);
+                Thread.Sleep(1000);
+                Console.Write(new string('\b', i.ToString().Length) + new string(' ', i.ToString().Length) + new string('\b', i.ToString().Length));
+            }
         }
     }
 }

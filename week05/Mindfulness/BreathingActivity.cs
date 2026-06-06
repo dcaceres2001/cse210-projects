@@ -1,22 +1,27 @@
 using System;
 
-
 namespace Mindfulness
 {
-    class BreathingActivity : Activity
+    public class BreathingActivity : Activity
     {
-        public BreathingActivity() : base("Breathing Activity", "This activity will help you relax by focusing on your breathing.")
-        {
-        }
+        public BreathingActivity() : base(
+            "Breathing Activity",
+            "This activity will help you relax by walking you through breathing in and out slowly. Clear your mind and focus on your breathing.")
+        { }
 
-        public void Start()
+        protected override void ExecuteActivity()
         {
-            DisplayStartMessage();
-            // Implement the breathing exercise logic here
-            // For example, you could have a loop that guides the user through inhaling and exhaling
-            DisplayEndMessage();
+            DateTime endTime = DateTime.Now.AddSeconds(_duration);
+
+            while (DateTime.Now < endTime)
+            {
+                Console.Write("\nBreathe in... ");
+                ShowCountdown(4);
+
+                Console.Write("\nBreathe out... ");
+                ShowCountdown(6);
+                Console.WriteLine();
+            }
         }
     }
 }
-
-      
