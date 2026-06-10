@@ -54,8 +54,8 @@ namespace Mindfulness
             // Log the activity
             _activityLog.Add($"{_name} - {_duration} seconds");
 
-            // Display log
-            Console.WriteLine($"\nSessions completed this run: {_activityLog.Count}");
+            // I have added this to show the activity log after each session. 
+             Console.WriteLine($"\nSessions completed this run: {_activityLog.Count}");
             Console.WriteLine("Activity Log:");
             foreach (string entry in _activityLog)
             {
